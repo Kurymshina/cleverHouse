@@ -11,21 +11,27 @@ import java.util.stream.Stream;
 class RadioTest {
     @ParameterizedTest
     @MethodSource("provideStringsForIsStation")
-    void shouldSetStation(int station, int expected) {
+    void shouldSetStation(int station, int expected, int kotorya_seichas) {
         Radio rad = new Radio();
+        rad.setStation(kotorya_seichas);
+
         rad.setStation(station);
         int actual = rad.getStation();
+
         Assertions.assertEquals(expected, actual);
     }
 
     private static Stream<Arguments> provideStringsForIsStation() {
         return Stream.of(
-                Arguments.of(-1, 0),
-                Arguments.of(0, 0),
-                Arguments.of(1, 1),
-                Arguments.of(8, 8),
-                Arguments.of(9, 9),
-                Arguments.of(10, 0)
+                Arguments.of(0, 0, 0),
+                Arguments.of(1, 1, 0),
+                Arguments.of(8, 8, 0),
+                Arguments.of(9, 9, 0),
+                Arguments.of(10, 0, 0),
+                Arguments.of(-1, 0, 0),
+                Arguments.of(-5, 6, 6),
+                Arguments.of(10, 3, 3),
+                Arguments.of(100, 3, 3)
         );
     }
 

@@ -6,12 +6,9 @@ public class Radio {
 
     public void setStation(int station) {
 //        this.station = station < 0 || station > 9 ? 0 : station;
-        this.station = station;
-        if (station < 0) {
-            this.station = 0;
-        }
-        if (station > 9) {
-            this.station = 0;
+
+        if (station <= 9 && station >= 0) {
+            this.station = station;
         }
     }
 
@@ -39,15 +36,20 @@ public class Radio {
     }
 
     public void next() {
-        setStation(++station);
-
+        if (station == 9) {
+            setStation(0);
+        } else {
+            setStation(++station);
+        }
     }
 
     public void prev() {
 //        setStation(station == 0 ? 9 : --station);
         if (station > 0) {
             setStation(--station);
-        } else station = 9;
+        } else {
+            station = 9;
+        }
     }
 
     public void plusVolume() {
@@ -55,11 +57,8 @@ public class Radio {
     }
 
     public void minusVolume() {
-//        setVolume(volume == 0 ? 0 : --volume);
-        if(volume == 0){
-            volume = 0;
+        if (volume != 0) {
+            setVolume(--volume);
         }
-        else
-        setVolume(--volume);
     }
 }
