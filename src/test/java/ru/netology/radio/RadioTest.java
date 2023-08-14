@@ -109,6 +109,7 @@ class RadioTest {
                 Arguments.of(0, 6, 6)
         );
     }
+
     @ParameterizedTest
     @MethodSource("provideStringsForIsVolume")
     void shouldSetVolume(int volume, int expected) {
