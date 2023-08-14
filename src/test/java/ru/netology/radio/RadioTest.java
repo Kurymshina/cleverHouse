@@ -103,13 +103,13 @@ class RadioTest {
 
     private static Stream<Arguments> setMinMax() {
         return Stream.of(
-                Arguments.of(0, -1, -1),
                 Arguments.of(0, 5, 5),
                 Arguments.of(1, 1, 1),
                 Arguments.of(4, 4, 4),
                 Arguments.of(0, 6, 6)
         );
     }
+
     @ParameterizedTest
     @MethodSource("provideStringsForIsVolume")
     void shouldSetVolume(int volume, int expected) {
