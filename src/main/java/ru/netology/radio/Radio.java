@@ -1,23 +1,65 @@
 package ru.netology.radio;
 
 public class Radio {
-    private int station;
+    private int previouslyStation;
+    private int currentStation;
+    private int minStation;
+    private int maxStation;
     private int volume;
+    private int count;
 
-    public void setStation(int station) {
-//        this.station = station < 0 || station > 9 ? 0 : station;
+    public int getPreviouslyStation() {
+        return previouslyStation;
+    }
 
-        if (station <= 9 && station >= 0) {
-            this.station = station;
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
+
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setPreviouslyStation(int previouslyStation) {
+        {
+            this.previouslyStation = previouslyStation;
         }
     }
 
-    public int getStation() {
-        return station;
+    public void setCurrentStation(int currentStation) {
+        if (currentStation >= 0 && currentStation < count) {
+            this.currentStation = currentStation;
+        } else {
+            this.currentStation = previouslyStation;
+        }
+    }
+
+    public void setMinStation(int minStation) {
+        if (minStation >= 0 && minStation < count) {
+            this.minStation = minStation;
+        } else {
+            return;
+        }
+        ;
+    }
+
+    public void setMaxStation(int maxStation) {
+        if (maxStation >= 0 && maxStation < count) {
+            this.maxStation = maxStation;
+        } else {
+            return;
+        }
     }
 
     public void setVolume(int volume) {
-//        this.volume = volume < 0 ? 0 : Math.min(volume, 100);
 
         if (volume < 0) {
             this.volume = 0;
@@ -31,24 +73,28 @@ public class Radio {
 
     }
 
-    public int getVolume() {
-        return volume;
+    public Radio(int size) {
+        count = minStation + size;
+    }
+
+    public Radio() {
+        count = minStation + 10;
     }
 
     public void next() {
-        if (station == 9) {
-            setStation(0);
+        if (currentStation == maxStation) {
+            setCurrentStation(0);
         } else {
-            setStation(++station);
+            setCurrentStation(++currentStation);
         }
     }
 
     public void prev() {
-//        setStation(station == 0 ? 9 : --station);
-        if (station > 0) {
-            setStation(--station);
+
+        if (currentStation > 0) {
+            setCurrentStation(--currentStation);
         } else {
-            station = 9;
+            currentStation = --count;
         }
     }
 
